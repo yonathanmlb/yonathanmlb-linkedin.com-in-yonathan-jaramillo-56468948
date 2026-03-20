@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yonathan Jaramillo | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --panel: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f5f7fb;
+      --muted: #a8afc3;
+      --soft: #7f879b;
+      --shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04), transparent 25%),
+        linear-gradient(180deg, #07070b 0%, #0a0a0f 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .container {
+      width: min(var(--max), 92%);
+      margin: 0 auto;
+    }
+
+    .blur-orb {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(120px);
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      top: -120px;
+      left: -120px;
+      animation: float1 10s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      right: -120px;
+      top: 300px;
+      animation: float2 12s ease-in-out infinite;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, 40px); }
+    }
+
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-35px, 25px); }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 15, 0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .logo span {
+      opacity: 0.55;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      transition: 0.25s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 120px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #0b0b10;
+      border-color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #ececec;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .chip {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.92rem;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .chip:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    section.section {
+      position: relative;
+      z-index: 1;
+      padding: 56px 0;
+    }
+
+    .section-head {
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 780px;
+      line-height: 1.8;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      display: block;
+      color: inherit;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255,255,255,0.16);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.52);
+    }
+
+    .project-image-wrap {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .project-image {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.65s ease;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.08);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,8,12,0.04), rgba(8,8,12,0.75));
+    }
+
+    .project-label {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .project-content {
+      padding: 22px;
+    }
+
+    .project-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .project-topline span {
+      color: var(--soft);
+      font-size: 0.84rem;
+    }
+
+    .project-arrow {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      transition: transform 0.25s ease, background 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .project-card:hover .project-arrow {
+      transform: translateX(4px) rotate(-8deg);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .project-title {
+      font-size: 1.35rem;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 16px;
+      min-height: 84px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tags span {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #d3d9ea;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .glass-card {
+      padding: 28px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .glass-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .glass-card p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .skills span {
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #d8deed;
+      font-weight: 600;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .skills span:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .contact-box {
+      text-align: center;
+      padding: 42px 26px;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      letter-spacing: -0.06em;
+      margin-bottom: 16px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 24px;
+      line-height: 1.8;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 28px 0 50px;
+      color: var(--soft);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1050px) {
+      .projects-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-desc {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .hero-copy {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blur-orb orb-1"></div>
+  <div class="blur-orb orb-2"></div>
+
+  <header>
+    <div class="container nav">
+      <a href="#home" class="logo">Yonathan <span>Jaramillo</span></a>
+
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal show">
+          <div class="eyebrow">Software Engineer • AWS Cloud Architect</div>
+
+          <h1>
+            Frontend,<br>
+            cloud, and<br>
+            real projects.
+          </h1>
+
+          <p class="hero-copy">
+            I’m Yonathan Jaramillo, a developer building modern web experiences and growing toward
+            cloud-focused engineering roles. I combine frontend practice, AWS knowledge, and an entrepreneurial
+            mindset to create clean, responsive, real-world projects.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn">Contact</a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="chip">HTML • CSS • JavaScript</div>
+            <div class="chip">Responsive UI Builds</div>
+            <div class="chip">AWS Career Path</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Selected Work</div>
+          <h2 class="section-title">Featured projects.</h2>
+          <p class="section-text">
+            Click any project card to open the live website.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <a class="project-card reveal" href="https://stunning-puppy-c3d06a.netlify.app/" target="_blank">
+            <div class="project-image-wrap">
+              <img
+                class="project-image"
+                src="https://images.unsplash.com/photo-1467453678174-768ec283a940?auto=format&fit=crop&w=1200&q=80"
+                alt="Cuisine Restaurant project preview"
+              />
+              <div class="project-overlay"></div>
+              <div class="project-label">Project 01</div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-topline">
+                <span>Frontend Layout Recreation</span>
+                <div class="project-arrow">↗</div>
+              </div>
+
+              <h3 class="project-title">Cuisine Restaurant</h3>
+              <p class="project-desc">
+                Restaurant landing page with hero layout, search row, story section, specialty cuisine cards,
+                opening-hours panel, and testimonial content.
+              </p>
+
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Responsive UI</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card reveal" href="https://glowing-fenglisu-576aa0.netlify.app/" target="_blank">
+            <div class="project-image-wrap">
+              <img
+                class="project-image"
+                src="https://images.unsplash.com/photo-1523263685509-57c1d050d19b?auto=format&fit=crop&w=1200&q=80"
+                alt="Ayesha Hair Salon project preview"
+              />
+              <div class="project-overlay"></div>
+              <div class="project-label">Project 02</div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-topline">
+                <span>Editorial Multi-Section Design</span>
+                <div class="project-arrow">↗</div>
+              </div>
+
+              <h3 class="project-title">Ayesha Hair Salon</h3>
+              <p class="project-desc">
+                Premium salon interface with hero image, services row, lookbook gallery, offer banner,
+                and strong two-column composition.
+              </p>
+
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS Grid</span>
+                <span>Visual Design</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card reveal" href="https://magnificent-malabi-e066fe.netlify.app/" target="_blank">
+            <div class="project-image-wrap">
+              <img
+                class="project-image"
+                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop"
+                alt="Khan Academy layout project preview"
+              />
+              <div class="project-overlay"></div>
+              <div class="project-label">Project 03</div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-topline">
+                <span>Responsive Landing Page Clone</span>
+                <div class="project-arrow">↗</div>
+              </div>
+
+              <h3 class="project-title">Khan Academy Layout</h3>
+              <p class="project-desc">
+                A clean recreation focused on navbar structure, layered hero graphics, search field,
+                student imagery, and CTA button layout.
+              </p>
+
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Layout Practice</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">About</div>
+          <h2 class="section-title">Building a portfolio with real momentum.</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="glass-card reveal">
+            <h3>My focus</h3>
+            <p>
+              I’m building a portfolio that reflects frontend execution, cloud ambition, and consistency.
+              My goal is to keep adding stronger projects, better UI, JavaScript applications, and AWS-based work
+              that shows real growth over time.
+            </p>
+          </div>
+
+          <div class="glass-card reveal">
+            <h3>Skills</h3>
+            <p>
+              Current strengths include layout recreation, responsive structure, visual hierarchy, clean sectioning,
+              and learning through real project builds.
+            </p>
+
+            <div class="skills">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+              <span>Responsive Design</span>
+              <span>Netlify</span>
+              <span>AWS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box reveal">
+          <h2>Let’s build something great.</h2>
+          <p>
+            Add your LinkedIn and email, then publish this portfolio on Netlify so recruiters and instructors can click straight into your work.
+          </p>
+
+          <div class="contact-links">
+            <a class="btn btn-primary" href="mailto:yonathanmlb@hotmail.com">Email Me</a>
+            <a class="btn" href="https://www.linkedin.com/in/yonathan-jaramillo-56468948/" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Built by Yonathan Jaramillo
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
